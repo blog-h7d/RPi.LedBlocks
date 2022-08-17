@@ -2,7 +2,7 @@
 
 pytest
 pytest-asyncio
-pytest-coverage
+pytest-cov
 deepdiff
 pylint
 pylint-pytest
