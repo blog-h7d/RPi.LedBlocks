@@ -5,9 +5,18 @@ load-plugins=pylint_pytest
 
 max-line-length: 120
 
+fail-under=8
+
 [MESSAGES CONTROL]
 disable=
     missing-docstring,
     missing-class-docstring,
     missing-function-docstring,
     missing-module-docstring,
+
+
+[REPORTS]
+reports=yes
+
+[BASIC]
+good-names=_,dt,e,f,default_app_config,logger,RPi
