@@ -5,6 +5,6 @@ pydantic==1.9.2
 
 # eventually additional_scripts_has_to_be_installed:
 # https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi
-adafruit-circuitpython-neopixel~=6.3.4
+# adafruit-circuitpython-neopixel~=6.3.4
 
 
