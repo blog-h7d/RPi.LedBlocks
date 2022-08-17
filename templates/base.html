@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LED Matrix</title>
+    <link rel="stylesheet" href="/static/default.css">
+    <script type="application/javascript" src="/static/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="content">
+    <div class="left">
+        <ul class="menu">
+            <li><a href="/status/" target="status_frame">Status</a>
+                <ul class="menu">
+                    {% for block in blocks %}
+                    <li><a href="/block/{{block.name}}/" target="status_frame">{{block.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <div class="right">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

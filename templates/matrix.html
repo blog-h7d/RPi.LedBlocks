@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Matrix: {{matrix.name}}</h1>
+<div style="float: left">
+    <h2>Visualisation</h2>
+    <table class="matrix {{matrix.name}}">
+        {% for row in matrix.blocks %}
+        <tr class="row">
+            {% for col in row %}
+            <td class="block">
+                <div style="background-color: {{ col.color.as_html }};
+                            color: {{ col.color.text_as_html }}">
+                    Start:{{ col.start }}<br>
+                    End: {{ col.end }}
+                </div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div>
+    <h2>Configuration for Block {{ matrix.name }}</h2>
+    <table class="form">
+        <tr>
+            <td>Rows:</td>
+            <td>{{ matrix.rows }}</td>
+        </tr>
+        <tr>
+            <td>Cols:</td>
+            <td>{{ matrix.rows }}</td>
+        </tr>
+        <tr>
+            <td>Strip:</td>
+            <td>{{ matrix.strip_name }}</td>
+        </tr>
+    </table>
+</div>
+
+<h2 style="clear:both">Actions for {{matrix.name}}</h2>
+
+<div class="action_block">
+    <h3>Stop</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=stop"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+</div>
+
+<div class="action_block">
+    <h3>Random colors</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=random"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Random with red/blue</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=random&color1=red&color2=blue"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+</div>
+
+<div class="action_block">
+    <h3>Color run with random color</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=color_run"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Color run with red/blue</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=color_run&color1=red&color2=blue"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Color run with green/yellow</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=color_run&color1=green&color2=light_yellow"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+</div>
+
+<div class="action_block">
+    <h3>Fixed Color with random color</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=fixed"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Fixed Color with red</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=fixed&color1=red"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Fixed Color with blue</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=fixed&color1=blue"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+</div>
+
+<div class="action_block">
+    <h3>Fading with random color</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=fading"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Fading with red/blue</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=fading&color1=red&color2=blue"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+    <h3>Fading with yellow/green</h3>
+    <form method="post"
+          action="/block/{{matrix.name}}/?program=fading&color1=light_yellow&color2=green"
+    >
+        <button type="submit">Start Action</button>
+    </form>
+</div>
+
+<script type="application/javascript">
+    function update_data() {
+        $.get('/block/{{matrix.name}}/colors/', function (data) {
+            let rows = $('.matrix .row');
+            rows.each(function (row_index) {
+                let blocks = $(this).find('div');
+                blocks.each(function (col_index) {
+                    $(this).css({
+                        'background-color': data[row_index][col_index][0],
+                        'color': data[row_index][col_index][1]
+                    });
+                })
+            })
+        })
+        return true
+    }
+
+    setInterval(update_data, 200)
+</script>
+
+{% endblock %}
