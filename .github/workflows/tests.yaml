@@ -26,7 +26,7 @@ jobs:
           pip install -r requirements-dev.txt
       - name: Lint with pylint
         run: |
-          pylint --rcfile pylint.rc
+          pylint --rcfile pylint.rc .
 
   pytest:
     runs-on: ubuntu-latest
